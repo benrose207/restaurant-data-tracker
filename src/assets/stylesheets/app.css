@@ -1,0 +1,52 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+}
+
+nav {
+  width: 95%;
+  margin: 1rem auto 1.5rem auto;
+}
+
+main {
+  margin: 1rem;
+}
+
+h1 {
+  font-size: 1.75rem;
+}
+
+.charts-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.metric-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1rem;
+  padding: 1.25rem 0.5rem 1.25rem 0.5rem;
+  border: 1px solid rgb(214, 214, 214);
+  border-radius: 0.75rem;
+  box-shadow: 0 0 8px rgb(207, 207, 207);
+}
+
+.chart-component {
+  flex-direction: column;
+  max-width: 450px;
+}
+
+.num-component {
+  font-size: 1.5rem;
+  max-width: 175px;
+}
+
+.chart-component > h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.barChart-container {
+  width: 400px;
+}
