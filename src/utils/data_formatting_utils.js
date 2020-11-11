@@ -20,9 +20,9 @@ export const sortByDate = (data) => {
 }
 
 export const filterDataByDate = (data, startDate, endDate) => {
-  const start = startDate ? new Date(startDate) : formatAsDate(data[0].first_seen_utc);
-  const end = endDate ? new Date(endDate) : formatAsDate(data[data.length - 1].first_seen_utc);
-
+  const start = startDate ? new Date(`${startDate}T00:00`) : formatAsDate(data[0].first_seen_utc);
+  const end = endDate ? new Date(`${endDate}T00:00`) : formatAsDate(data[data.length - 1].first_seen_utc);
+  debugger
   return data.filter(customer => {
     const customerDate = formatAsDate(customer.first_seen_utc)
     return customerDate >= start && customerDate <= end;
