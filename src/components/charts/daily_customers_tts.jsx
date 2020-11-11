@@ -1,40 +1,39 @@
 import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js';
+import { getFormattedDate } from '../../utils/data_formatting_utils';
 
-const CustomersPerDayPart = ({ rawData }) => {
+const DailyCustomersTTS = ({ rawData }) => {
   const ctx = useRef();
 
   useEffect(() => {
-    const formattedData = {
-      1: [0, 0],
-      2: [0, 0],
-      3: [0, 0],
-      4: [0, 0],
-      5: [0, 0],
-      6: [0, 0],
-    };
+    const formattedData = {};
 
     rawData.forEach(row => {
-      if (row.day_part) {
-        if (formattedData[row.day_part][0] >= 0) {
-          formattedData[row.day_part][0]++;
-          if (row.tts) formattedData[row.day_part][1] += parseInt(row.tts);
-        }
+      if (row.first_seen_utc) {
+        const date = getFormattedDate(row.first_seen_utc);
+
+        if (!formattedData[date]) formattedData[date] = [0, 0];
+        formattedData[date][0]++;
+        formattedData[date][1] += parseInt(row.tts);
       }
-    });
+    })
 
     const chart = new Chart(ctx.current, {
-      type: 'bar',
+      type: 'line',
       data: {
-        labels: ['Breakfast', 'Lunch', 'Afternoon', 'Dinner', 'Evening', 'Late Night'],
+        labels: Object.keys(formattedData),
         datasets: [{
           label: 'Customers',
           data: Object.values(formattedData).map(value => value[0]),
-          backgroundColor: new Array(Object.keys(formattedData).length).fill('#3BA3F2'),
+          backgroundColor: '#3BA3F2',
+          borderColor: '#3BA3F2',
+          fill: false
         }, {
-          label: 'TTS (seconds)',
+          label: 'Avg TTS (seconds)',
           data: Object.values(formattedData).map(value => Math.round(value[1] / value[0])),
-          backgroundColor: new Array(Object.keys(formattedData).length).fill('#FBD533'),
+          backgroundColor: '#FBD533',
+          borderColor: '#FBD533',
+          fill: false
         }]
       },
       options: {
@@ -55,12 +54,12 @@ const CustomersPerDayPart = ({ rawData }) => {
 
   return (
     <div className="metric-card chart-component">
-      <h2>Avg. Customers per Day Part</h2>
+      <h2>Daily Customers and TTS</h2>
       <div className="barChart-container">
-        <canvas id="customersPerDayPart" ref={ctx}></canvas>
+        <canvas id="dailyCustomersTTS" ref={ctx}></canvas>
       </div>
     </div>
   );
 };
 
-export default CustomersPerDayPart;
+export default DailyCustomersTTS;

@@ -28,7 +28,7 @@ const CustomersPerHour = ({ rawData }) => {
           data: Object.values(formattedData).map(value => value[0]),
           backgroundColor: new Array(Object.keys(formattedData).length).fill('#3BA3F2'),
         }, {
-            label: 'TTS',
+            label: 'TTS (seconds)',
             data: Object.values(formattedData).map(value => Math.round(value[1] / value[0])),
             backgroundColor: new Array(Object.keys(formattedData).length).fill('#FBD533'),
         }]

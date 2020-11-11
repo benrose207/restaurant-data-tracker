@@ -4,6 +4,7 @@ import AvgTTS from './charts/avg_tts';
 import CustomersPerDay from './charts/customers_per_day';
 import CustomersPerDayPart from './charts/customers_per_dayPart';
 import CustomersPerHour from './charts/customers_per_hour';
+import DailyCustomersTTS from './charts/daily_customers_tts';
 
 const Dashboard = () => {
   const [data, setData] = useState([]);
@@ -27,6 +28,7 @@ const Dashboard = () => {
     <main>
       <AvgTTS rawData={data} />
       <section className="charts-container">
+        <DailyCustomersTTS rawData={data}/>
         <CustomersPerDay rawData={data} />
         <CustomersPerDayPart rawData={data} />
         <CustomersPerHour rawData={data} />

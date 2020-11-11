@@ -4,3 +4,12 @@ export const getAvgTTS = (data) => {
 
   return avg;
 }
+
+export const getFormattedDate = (utcDate) => {
+  const date = new Date(parseInt(utcDate) * 1000);
+  const month = date.getMonth();
+  const day = date.getDate();
+  const year = date.getFullYear();
+
+  return `${month + 1}-${day}-${year}`;
+}
