@@ -54,15 +54,17 @@ const Dashboard = () => {
   return (
     <main>
       <div className="dashboard-header">
-        <AvgTTS rawData={filteredData.length ? filteredData : initialData} />
         <form onSubmit={handleFilters}>
-          <label htmlFor="startDate">Start</label>
-          <input type="date" id="startDate" name="start" value={dateRange.start} onChange={handleDateChange}/>
-          <label htmlFor="endDate">End</label>
-          <input type="date" id="endDate" name="end" value={dateRange.end} onChange={handleDateChange} />
-          <button type="submit">Apply</button>
-          <button type="button" onClick={handleFilterClear} >Clear</button>
+          <label htmlFor="startDate">Start
+            <input type="date" id="startDate" name="start" value={dateRange.start} onChange={handleDateChange}/>
+          </label>
+          <label htmlFor="endDate">End
+            <input type="date" id="endDate" name="end" value={dateRange.end} onChange={handleDateChange} />
+          </label>
+          <button className="btn primary-btn" type="submit">Apply</button>
+          <button className="btn secondary-btn" type="button" onClick={handleFilterClear} >Clear</button>
         </form>
+        <AvgTTS rawData={filteredData.length ? filteredData : initialData} />
       </div>
       <section className="charts-container">
         <DailyCustomersTTS rawData={filteredData.length ? filteredData : initialData}/>

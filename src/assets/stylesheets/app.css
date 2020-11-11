@@ -9,7 +9,8 @@ nav {
 }
 
 main {
-  margin: 1rem;
+  max-width: 900px;
+  margin: 1rem auto;
 }
 
 h1 {
@@ -20,6 +21,42 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.dashboard-header form {
+  margin: 0 1rem;
+}
+
+.dashboard-header form > * {
+  margin: 0.75rem 0;
+  margin-right: 1rem;
+}
+
+input[type=date] {
+  margin-left: 0.5rem
+}
+
+.btn {
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.7rem;
+}
+
+.primary-btn {
+  background-color: #3BA3F2;
+  color: white;
+}
+
+.primary-btn:hover {
+  background-color: #63b1ec;
+}
+
+.secondary-btn {
+  background-color: lightgray;
+}
+
+.secondary-btn:hover {
+  background-color: rgb(190, 189, 189);
 }
 
 .charts-container {

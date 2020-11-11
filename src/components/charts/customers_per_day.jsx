@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import Chart from 'chart.js';
 
-const CustomersPerDay = ({ rawData }) => {
-  const ctx = useRef();
-  
+const CustomersPerDay = ({ rawData }) => {  
   useEffect(() => {
+    if (window.customersPerDayChart && window.customersPerDayChart !== null) {
+      window.customersPerDayChart.destroy();
+    }
+
     const formattedData = {
       Mon: [0, 0],
       Tue: [0, 0],
@@ -38,7 +40,9 @@ const CustomersPerDay = ({ rawData }) => {
       }
     });
 
-    const chart = new Chart(ctx.current, {
+    const ctx = document.getElementById('customersPerDay').getContext('2d');
+
+    window.customersPerDayChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: Object.keys(formattedData),
@@ -78,7 +82,7 @@ const CustomersPerDay = ({ rawData }) => {
     <div className="metric-card chart-component">
       <h2>Avg. Customers per Day</h2>
       <div className="barChart-container">
-        <canvas id="customersPerDay" ref={ctx}></canvas>
+        <canvas id="customersPerDay" ></canvas>
       </div>
     </div>
   );

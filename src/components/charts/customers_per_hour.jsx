@@ -1,10 +1,12 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import Chart from 'chart.js';
 
-const CustomersPerHour = ({ rawData }) => {
-  const ctx = useRef();
-
+const CustomersPerHour = ({ rawData }) => {  
   useEffect(() => {
+    if (window.customersPerHourChart && window.customersPerHourChart !== null) {
+      window.customersPerHourChart.destroy();
+    }
+    
     const formattedData = {};
 
     rawData.forEach(row => {
@@ -19,7 +21,9 @@ const CustomersPerHour = ({ rawData }) => {
       }
     });
 
-    const chart = new Chart(ctx.current, {
+    const ctx = document.getElementById('customersPerHour').getContext('2d');
+
+    window.customersPerHourChart = new Chart(ctx, {
       type: 'bar',
       data: {
         labels: Object.keys(formattedData),
@@ -53,7 +57,7 @@ const CustomersPerHour = ({ rawData }) => {
     <div className="metric-card chart-component">
       <h2>Avg. Customers per Hour</h2>
       <div className="barChart-container">
-        <canvas id="customersPerHour" ref={ctx}></canvas>
+        <canvas id="customersPerHour" ></canvas>
       </div>
     </div>
   );
